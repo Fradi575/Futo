@@ -1,12 +1,12 @@
-import Models.Tabla;
-import org.junit.jupiter.api.Test;
+import Models.Tabla2;
+        import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+        import static org.junit.jupiter.api.Assertions.*;
 
 public class TablaTest {
     @Test
     void TestMozgat() {
-        Tabla tabla = new Tabla();
+        Tabla2 tabla = new Tabla2();
         tabla.mozgat(0, 1, 1, 2);
         assertEquals(0, tabla.getMezok()[0][1].getBabu());
         assertEquals(1, tabla.getMezok()[1][2].getBabu());
@@ -14,7 +14,7 @@ public class TablaTest {
 
     @Test
     void TestSikertelenMozgat() {
-        Tabla tabla = new Tabla();
+        Tabla2 tabla = new Tabla2();
         tabla.mozgat(0, 2, 1, 3);
         assertNotEquals(0, tabla.getMezok()[0][2].getBabu());
         assertNotEquals(1, tabla.getMezok()[1][3].getBabu());
@@ -22,19 +22,19 @@ public class TablaTest {
 
     @Test
     void TestSzabade() {
-        Tabla tabla = new Tabla();
+        Tabla2 tabla = new Tabla2();
         assertTrue(tabla.szabade(0, 1, 1, 2));
     }
 
     @Test
     void TestNemSZabad() {
-        Tabla tabla = new Tabla();
+        Tabla2 tabla = new Tabla2();
         assertFalse(tabla.szabade(0, 2, 1, 3));
     }
 
     @Test
     void TestMegoldva() {
-        Tabla tabla = new Tabla();
+        Tabla2 tabla = new Tabla2();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 tabla.getMezok()[i][j].setBabu(0);
@@ -49,7 +49,7 @@ public class TablaTest {
 
     @Test
     void TestNincsMegoldva() {
-        Tabla tabla = new Tabla();
+        Tabla2 tabla = new Tabla2();
         assertFalse(tabla.megoldva());
     }
 }

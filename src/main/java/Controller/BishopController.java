@@ -1,7 +1,5 @@
 package Controller;
 
-import Dao.HighScoreDao;
-import Dao.Score;
 import Models.Tabla;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -19,7 +17,7 @@ import org.tinylog.Logger;
 import java.io.IOException;
 import java.util.ArrayList;
 
-// TODO
+
 public class BishopController {
     @FXML
     private GridPane grid;
@@ -68,7 +66,6 @@ public class BishopController {
      * Menti egy listába a klikkelések pozicióját.
      * Ha 2 klikkelés volt, akkor meghívja a mozgatást.
      * Ellenőrzi mozgatás után, hogy célállapot-e.
-     * Ha célállapot, akkor menti az eredményeket
      * Mozgatás után kiűríti a választott poziciók listáját
      *
      * @param event klikkelés
@@ -88,10 +85,7 @@ public class BishopController {
             klikkek.set(klikkek.get() + 1);
             if (tabla.megoldva()) {
                 Logger.info("Megoldva, gratulálok!");
-                Logger.info("Eredmények mentése...");
-                Score newScore = new Score(nev.getValue(), String.valueOf(klikkek));
-                HighScoreDao highScoreDao = new HighScoreDao();
-                highScoreDao.addScore(newScore);
+
             }
             selections.clear();
         }
@@ -161,13 +155,13 @@ public class BishopController {
 
     /**
      * Felad gomb megnyomásának végrehajtása.
-     * Célállapot megjelenítése, eredmények tárolása.
+     * Célállapot megjelenítése.
      *
      * @param actionEvent klikkelés
      * @throws IOException
      */
     public void feladButtonPressed(ActionEvent actionEvent) throws IOException {
-        Logger.info("Játék feladva, cél beállítása, mentés az eredményekbe!");
+        Logger.info("Játék feladva, cél beállítása!");
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 tabla.getMezok()[i][j].setBabu(0);
@@ -178,8 +172,6 @@ public class BishopController {
             tabla.getMezok()[4][k].setBabu(1);
         }
         teglalapFrissites();
-        Score newScore = new Score(nev.getValue(), String.valueOf(klikkek.getValue()));
-        HighScoreDao highScoreDao = new HighScoreDao();
-        highScoreDao.addScore(newScore);
+
     }
 }

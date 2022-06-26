@@ -13,7 +13,7 @@ import org.tinylog.Logger;
 
 import java.io.IOException;
 
-// TODO
+
 public class StartController {
     @FXML
     Button startButton;
@@ -51,20 +51,5 @@ public class StartController {
         }
     }
 
-    /**
-     * Eredmények gomb megnyomása. Betölti a highscore.fxml-t.
-     *
-     * @param actionEvent
-     * @throws IOException
-     */
-    public void highScoreButtonPressed(ActionEvent actionEvent) throws IOException {
-        Logger.info("Eredmények megtekintése.");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/highscore.fxml"));
-        fxmlLoader.setLocation(getClass().getResource("/highscore.fxml"));
-        Parent root = fxmlLoader.load();
-        HighScoreController highScoreController = fxmlLoader.<HighScoreController>getController();
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
+
 }

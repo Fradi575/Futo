@@ -11,29 +11,27 @@ import org.tinylog.Logger;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Tabla {
+public class Tabla2 {
+
+
+
     private Mezo[][] mezok = new Mezo[5][4];
 
     /**
-     * Konstruktor, amely a táblát egy célállapothoz közeli állapotba helyezi.
+     * Konstruktor, amely a táblát alaphelyzetbe helyezi. Négy fekete futó az első sorban, négy fehér az utolsó sorban.
      */
-    public Tabla() {
+    public Tabla2() {
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++) {
                 mezok[i][j] = new Mezo(0, 0);
             }
-
-
-
-        for (int k = 0; k < 2; k++) {
-            mezok[0][k].setBabu(2);
-            mezok[4][k].setBabu(1);
+        for (int k = 0; k < 4; k++) {
+            mezok[0][k].setBabu(1);
+            mezok[4][k].setBabu(2);
         }
 
-        for (int k = 1; k < 3; k++) {
-            mezok[1][k].setBabu(2);
-            mezok[3][k].setBabu(1);
-        }
+
+
 
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++) {
@@ -43,6 +41,7 @@ public class Tabla {
                     mezok[i][j].setSzin(0);
             }
     }
+
 
     /**
      * Bábú mozgatása a táblán.
@@ -121,3 +120,4 @@ public class Tabla {
         return true;
     }
 }
+

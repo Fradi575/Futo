@@ -14,7 +14,7 @@
                 <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonPressed" text="Kezdés" />
             </children>
         </HBox>
-      <Button mnemonicParsing="false" text="Eredmények" onAction="#highScoreButtonPressed"/>
+
       <TextField alignment="CENTER" text="2.4 - Bishop Problem">
          <font>
             <Font size="36.0" />
