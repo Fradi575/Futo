@@ -1,55 +1,59 @@
-import Models.Tabla2;
-        import org.junit.jupiter.api.Test;
+import Models.Tabla;
 
-        import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TablaTest {
+
+
     @Test
     void TestMozgat() {
-        Tabla2 tabla = new Tabla2();
-        tabla.mozgat(0, 1, 1, 2);
-        assertEquals(0, tabla.getMezok()[0][1].getBabu());
-        assertEquals(1, tabla.getMezok()[1][2].getBabu());
+        Tabla tabla = new Tabla();
+        tabla.mozgat(1, 1, 0, 2);
+        assertEquals(Tabla.FEKETE, tabla.getMezok()[0][1]);
+        assertEquals(Tabla.URES, tabla.getMezok()[1][1]);
     }
 
     @Test
     void TestSikertelenMozgat() {
-        Tabla2 tabla = new Tabla2();
+        Tabla tabla = new Tabla();
         tabla.mozgat(0, 2, 1, 3);
-        assertNotEquals(0, tabla.getMezok()[0][2].getBabu());
-        assertNotEquals(1, tabla.getMezok()[1][3].getBabu());
+        // Mivel amit akarnek mozgatni ott nincsen babu, ezert ott 0 kell hogy maradjon
+        assertEquals(Tabla.URES, tabla.getMezok()[0][2]);
+        assertNotEquals(Tabla.FEHER, tabla.getMezok()[1][3]);
     }
 
     @Test
     void TestSzabade() {
-        Tabla2 tabla = new Tabla2();
-        assertTrue(tabla.szabade(0, 1, 1, 2));
+        Tabla tabla = new Tabla();
+        assertTrue(tabla.szabade(1, 1, 0, 2));
     }
 
     @Test
     void TestNemSZabad() {
-        Tabla2 tabla = new Tabla2();
-        assertFalse(tabla.szabade(0, 2, 1, 3));
+        Tabla tabla = new Tabla();
+        assertFalse(tabla.szabade(1, 2, 2, 3));
     }
 
     @Test
     void TestMegoldva() {
-        Tabla2 tabla = new Tabla2();
+        Tabla tabla = new Tabla();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                tabla.getMezok()[i][j].setBabu(0);
+                tabla.setMezo(i, j, Tabla.URES);
             }
         }
         for (int k = 0; k < 4; k++) {
-            tabla.getMezok()[0][k].setBabu(2);
-            tabla.getMezok()[4][k].setBabu(1);
+            tabla.setMezo(0, k, Tabla.FEKETE);
+            tabla.setMezo(4, k, Tabla.FEHER);
         }
         assertTrue(tabla.megoldva());
     }
 
     @Test
     void TestNincsMegoldva() {
-        Tabla2 tabla = new Tabla2();
+        Tabla tabla = new Tabla();
         assertFalse(tabla.megoldva());
     }
 }

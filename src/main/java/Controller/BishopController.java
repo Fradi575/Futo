@@ -17,7 +17,9 @@ import org.tinylog.Logger;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * A játék vezérlése.
+ * */
 public class BishopController {
     @FXML
     private GridPane grid;
@@ -86,6 +88,7 @@ public class BishopController {
             if (tabla.megoldva()) {
                 Logger.info("Megoldva, gratulálok!");
 
+
             }
             selections.clear();
         }
@@ -134,15 +137,15 @@ public class BishopController {
     private void teglalapFrissites() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                int futo = tabla.getMezok()[i][j].getBabu();
+                int futo = tabla.getMezok()[i][j];
                 String szin = "ures";
-                if (futo == 0) {
+                if (futo == Tabla.URES) {
                     szin = "ures";
                 }
-                if (futo == 1) {
+                if (futo == Tabla.FEKETE) {
                     szin = "black";
                 }
-                if (futo == 2) {
+                if (futo == Tabla.FEHER) {
                     szin = "white";
                 }
                 teglalapok[i][j].getStyleClass().clear();
@@ -164,12 +167,12 @@ public class BishopController {
         Logger.info("Játék feladva, cél beállítása!");
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                tabla.getMezok()[i][j].setBabu(0);
+                tabla.setMezo(i, j, Tabla.URES);
             }
         }
         for (int k = 0; k < 4; k++) {
-            tabla.getMezok()[0][k].setBabu(2);
-            tabla.getMezok()[4][k].setBabu(1);
+            tabla.setMezo(0, k, Tabla.FEKETE);
+            tabla.setMezo(4, k, Tabla.FEHER);
         }
         teglalapFrissites();
 

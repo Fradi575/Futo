@@ -12,7 +12,12 @@ import org.tinylog.Logger;
 @Setter
 @AllArgsConstructor
 public class Tabla {
-    private Mezo[][] mezok = new Mezo[5][4];
+
+    public static final int URES = 0;
+    public static final int FEHER = 1;
+    public static final int FEKETE = 2;
+
+    private int[][] mezok = new int[5][4];
 
     /**
      * Konstruktor, amely a táblát egy célállapothoz közeli állapotba helyezi.
@@ -20,28 +25,18 @@ public class Tabla {
     public Tabla() {
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 4; j++) {
-                mezok[i][j] = new Mezo(0, 0);
+                mezok[i][j] = URES;
             }
 
-
-
         for (int k = 0; k < 2; k++) {
-            mezok[0][k].setBabu(2);
-            mezok[4][k].setBabu(1);
+            mezok[0][k] = FEKETE;
+            mezok[4][k] = FEHER;
         }
 
         for (int k = 1; k < 3; k++) {
-            mezok[1][k].setBabu(2);
-            mezok[3][k].setBabu(1);
+            mezok[1][k] = FEKETE;
+            mezok[3][k] = FEHER;
         }
-
-        for (int i = 0; i < 5; i++)
-            for (int j = 0; j < 4; j++) {
-                if ((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1))
-                    mezok[i][j].setSzin(1);
-                else
-                    mezok[i][j].setSzin(0);
-            }
     }
 
     /**
@@ -53,11 +48,11 @@ public class Tabla {
      * @param hova_y   A célmező poziciójának oszlopa
      */
     public void mozgat(int honnan_x, int honnan_y, int hova_x, int hova_y) {
-        if (mezok[honnan_x][honnan_y].getBabu() == 0) {
+        if (mezok[honnan_x][honnan_y] == URES) {
             Logger.info("Nincs bábú amit mozgassak a mezőn!");
             return;
         }
-        if (mezok[hova_x][hova_y].getBabu() != 0) {
+        if (mezok[hova_x][hova_y] != URES) {
             Logger.info("Nem üres a célmező!");
             return;
         }
@@ -65,10 +60,10 @@ public class Tabla {
             Logger.info("Nem futólépés!");
             return;
         }
-        int jelenlegi_babu = mezok[honnan_x][honnan_y].getBabu();
+        int jelenlegi_babu = mezok[honnan_x][honnan_y];
         if (szabade(honnan_x, honnan_y, hova_x, hova_y)) {
-            mezok[honnan_x][honnan_y].setBabu(0);
-            mezok[hova_x][hova_y].setBabu(jelenlegi_babu);
+            mezok[honnan_x][honnan_y] = URES;
+            mezok[hova_x][hova_y] = jelenlegi_babu;
             Logger.info("Sikeres lépés!");
         } else {
             Logger.info("A mezőre nem tudsz lépni, mert ütés alatt áll!");
@@ -87,17 +82,17 @@ public class Tabla {
      */
 
     public boolean szabade(int honnan_x, int honnan_y, int hova_x, int hova_y) {
-        int jelenlegibabu = mezok[honnan_x][honnan_y].getBabu();
+        int jelenlegibabu = mezok[honnan_x][honnan_y];
         int ellenseges;
-        if (jelenlegibabu == 1) {
-            ellenseges = 2;
+        if (jelenlegibabu == FEHER) {
+            ellenseges = FEKETE;
         } else {
-            ellenseges = 1;
+            ellenseges = FEKETE;
         }
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 if (i != honnan_x && j != honnan_y) {
-                    if (((hova_x - i == hova_y - j) || (-hova_x + i == hova_y - j)) && mezok[i][j].getBabu() == ellenseges) {
+                    if (((hova_x - i == hova_y - j) || (-hova_x + i == hova_y - j)) && mezok[i][j] == ellenseges) {
                         return false;
                     }
                 }
@@ -113,11 +108,20 @@ public class Tabla {
      */
     public boolean megoldva() {
         for (int i = 0; i < 4; i++) {
-            if (mezok[0][i].getBabu() != 2)
+            if (mezok[0][i] != FEKETE)
                 return false;
-            if (mezok[4][i].getBabu() != 1)
+            if (mezok[4][i] != FEHER)
                 return false;
         }
         return true;
+    }
+
+    /**
+     * Függvény, amely a mezok[i][j]-nek értéket ad.
+     *    @param i A mezok i. eleme
+     *    @param j A mezok j. eleme
+     *    @param ertek, hogy a mezok[i][j]-nek milyen értéket adjunk */
+    public void setMezo(int i, int j, int ertek) {
+        mezok[i][j] = ertek;
     }
 }

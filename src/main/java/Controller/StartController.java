@@ -13,7 +13,9 @@ import org.tinylog.Logger;
 
 import java.io.IOException;
 
-
+/**
+ * Játék indítása.
+ * */
 public class StartController {
     @FXML
     Button startButton;
@@ -50,6 +52,5 @@ public class StartController {
             Logger.warn("Nincs név megadva.");
         }
     }
-
 
 }
