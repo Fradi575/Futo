@@ -47,27 +47,16 @@ public class Tabla {
      * @param hova_x   A célmező poziciójának sora
      * @param hova_y   A célmező poziciójának oszlopa
      */
+
     public void mozgat(int honnan_x, int honnan_y, int hova_x, int hova_y) {
-        if (mezok[honnan_x][honnan_y] == URES) {
-            Logger.info("Nincs bábú amit mozgassak a mezőn!");
-            return;
-        }
-        if (mezok[hova_x][hova_y] != URES) {
-            Logger.info("Nem üres a célmező!");
-            return;
-        }
-        if (!((hova_x - honnan_x == hova_y - honnan_y) || (-hova_x + honnan_x == hova_y - honnan_y))) {
-            Logger.info("Nem futólépés!");
-            return;
-        }
+
+
         int jelenlegi_babu = mezok[honnan_x][honnan_y];
-        if (szabade(honnan_x, honnan_y, hova_x, hova_y)) {
+
             mezok[honnan_x][honnan_y] = URES;
             mezok[hova_x][hova_y] = jelenlegi_babu;
             Logger.info("Sikeres lépés!");
-        } else {
-            Logger.info("A mezőre nem tudsz lépni, mert ütés alatt áll!");
-        }
+
 
     }
 
@@ -82,6 +71,21 @@ public class Tabla {
      */
 
     public boolean szabade(int honnan_x, int honnan_y, int hova_x, int hova_y) {
+
+        if (mezok[hova_x][hova_y] != URES) {
+            return false;
+
+        }
+        if (!((hova_x - honnan_x == hova_y - honnan_y) || (-hova_x + honnan_x == hova_y - honnan_y))) {
+            return false;
+
+        }
+
+        if (mezok[honnan_x][honnan_y] == URES) {
+            return false;
+
+        }
+
         int jelenlegibabu = mezok[honnan_x][honnan_y];
         int ellenseges;
         if (jelenlegibabu == FEHER) {
@@ -95,15 +99,16 @@ public class Tabla {
                     if (((hova_x - i == hova_y - j) || (-hova_x + i == hova_y - j)) && mezok[i][j] == ellenseges) {
                         return false;
                     }
+
                 }
             }
         }
         return true;
+
     }
 
     /**
      * Meg van-e oldva a tábla.
-     *
      * @return célállapotban vannak-e a bábúk a táblák. Célállapot, ha négy fehér az első sorban, a feketék pedig az utolsókban vannak
      */
     public boolean megoldva() {
@@ -120,7 +125,8 @@ public class Tabla {
      * Függvény, amely a mezok[i][j]-nek értéket ad.
      *    @param i A mezok i. eleme
      *    @param j A mezok j. eleme
-     *    @param ertek, hogy a mezok[i][j]-nek milyen értéket adjunk */
+     *    @param ertek, hogy a mezok[i][j]-nek milyen értéket adjunk
+     *    */
     public void setMezo(int i, int j, int ertek) {
         mezok[i][j] = ertek;
     }
