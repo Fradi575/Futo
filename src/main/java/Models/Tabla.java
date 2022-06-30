@@ -84,9 +84,9 @@ public class Tabla {
 
         }
 
-        int jelenlegibabu = mezok[honnan_x][honnan_y];
+        int jelenleg_babu = mezok[honnan_x][honnan_y];
         int ellenseges;
-        if (jelenlegibabu == FEHER) {
+        if (jelenleg_babu == FEHER) {
             ellenseges = FEKETE;
         } else {
             ellenseges = FEHER;
@@ -150,9 +150,7 @@ public class Tabla {
                     if (mezok[honnan_x][honnan_y] != 0) return false;
                 }
                 break;
-            default:
-                Logger.error("Valami rosszul ment az ellenorzes soran!");
-                break;
+            
         }
         return true;
     }
