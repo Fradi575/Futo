@@ -150,7 +150,7 @@ public class Tabla {
                     if (mezok[honnan_x][honnan_y] != 0) return false;
                 }
                 break;
-            
+
         }
         return true;
     }

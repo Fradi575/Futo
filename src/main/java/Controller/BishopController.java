@@ -78,7 +78,8 @@ public class BishopController {
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
         Logger.debug("Clicked square row: {}, col: {}", row, col);
-        Logger.info("Clicked square :" + row + " " + col);
+        Logger.debug("Tabla statusz: \n{}", tabla);
+
         selections.add(row);
         selections.add(col);
         if (selections.size() == 4) {
