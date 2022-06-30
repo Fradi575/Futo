@@ -61,13 +61,11 @@ public class Tabla {
     }
 
     /**
-     * A kijelölt mezőn lévő bábú számára szabad-e a célmező.
-     *
      * @param honnan_x A bábú kezdő poziciójának sora
      * @param honnan_y A bábú kezdő poziciójának oszlopa
      * @param hova_x   A célmező poziciójának sora
      * @param hova_y   A célmező poziciójának oszlopa
-     * @return szabad-e a mező, vagy üti ellenséges fútó
+     * @return megvalósítható-e a lépés, vagy nem
      */
 
     public boolean szabade(int honnan_x, int honnan_y, int hova_x, int hova_y) {
@@ -91,20 +89,72 @@ public class Tabla {
         if (jelenlegibabu == FEHER) {
             ellenseges = FEKETE;
         } else {
-            ellenseges = FEKETE;
+            ellenseges = FEHER;
         }
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
-                if (i != honnan_x && j != honnan_y) {
-                    if (((hova_x - i == hova_y - j) || (-hova_x + i == hova_y - j)) && mezok[i][j] == ellenseges) {
+                if (mezok[i][j] == ellenseges) {
+                    if (Math.abs(hova_x - i) == Math.abs(hova_y - j)) {
                         return false;
                     }
-
                 }
             }
         }
         return true;
 
+    }
+
+    /**
+     *
+     * @param honnan_x
+     * @param honnan_y
+     * @param hova_x
+     * @param hova_y
+     * Ez a fv ellenőrzi le, hogy léphet-e úgy a futó, hogy másik bábut átugorhasson.
+     */
+    public boolean atugrasellenoriz(int honnan_x, int honnan_y, int hova_x, int hova_y) {
+        // itt megnezi hog ne ugrojon at semmilyen  babut
+        // bal felso atlo
+        String holVanAhovaMegyek = "sehol";
+        if (honnan_x > hova_x && hova_y < honnan_y) holVanAhovaMegyek = "balFelul";
+        else if (honnan_x > hova_x && hova_y > honnan_y) holVanAhovaMegyek = "jobbFelul";
+        else if (honnan_x < hova_x && hova_y < honnan_y) holVanAhovaMegyek = "balAlul";
+        else if (honnan_x < hova_x && hova_y > honnan_y) holVanAhovaMegyek = "jobbAlul";
+
+        switch (holVanAhovaMegyek) {
+            case "balFelul":
+                while (honnan_x != hova_x && honnan_y != hova_y) {
+                    honnan_x -= 1;
+                    honnan_y -= 1;
+                    if (mezok[honnan_x][honnan_y] != 0) return false;
+                }
+                break;
+            case "jobbFelul":
+                while (honnan_x != hova_x && honnan_y != hova_y) {
+                    honnan_x -= 1;
+                    honnan_y += 1;
+                    if (mezok[honnan_x][honnan_y] != 0) return false;
+                }
+                break;
+            case "balAlul":
+                while (honnan_x != hova_x && honnan_y != hova_y) {
+                    honnan_x += 1;
+                    honnan_y -= 1;
+                    if (mezok[honnan_x][honnan_y] != 0) return false;
+                }
+                break;
+            case "jobbAlul":
+                while (honnan_x != hova_x && honnan_y != hova_y) {
+                    honnan_x += 1;
+                    honnan_y += 1;
+                    if (mezok[honnan_x][honnan_y] != 0) return false;
+                }
+                break;
+            default:
+                Logger.error("Valami rosszul ment az ellenorzes soran!");
+                break;
+        }
+        return true;
     }
 
     /**
@@ -129,5 +179,20 @@ public class Tabla {
      *    */
     public void setMezo(int i, int j, int ertek) {
         mezok[i][j] = ertek;
+    }
+
+    /**
+     * toString metódus
+     */
+    @Override
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
+                str += mezok[i][j];
+            }
+            str += '\n';
+        }
+        return str;
     }
 }

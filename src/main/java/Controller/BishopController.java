@@ -82,7 +82,7 @@ public class BishopController {
         selections.add(row);
         selections.add(col);
         if (selections.size() == 4) {
-            if(tabla.szabade(selections.get(0), selections.get(1), selections.get(2), selections.get(3))){
+            if(tabla.szabade(selections.get(0), selections.get(1), selections.get(2), selections.get(3)) && tabla.atugrasellenoriz(selections.get(0), selections.get(1), selections.get(2), selections.get(3))){
                 tabla.mozgat(selections.get(0), selections.get(1), selections.get(2), selections.get(3));
             }else{
                 Logger.info("A lépés nem megoldható!");
@@ -174,9 +174,14 @@ public class BishopController {
                 tabla.setMezo(i, j, Tabla.URES);
             }
         }
-        for (int k = 0; k < 4; k++) {
+        for (int k = 0; k < 2; k++) {
             tabla.setMezo(0, k, Tabla.FEKETE);
             tabla.setMezo(4, k, Tabla.FEHER);
+        }
+
+        for (int k = 1; k < 3; k++) {
+            tabla.setMezo(1, k,Tabla.FEKETE);;
+            tabla.setMezo(3, k, Tabla.FEHER);
         }
         teglalapFrissites();
 
