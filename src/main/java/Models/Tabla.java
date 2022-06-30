@@ -13,8 +13,19 @@ import org.tinylog.Logger;
 @AllArgsConstructor
 public class Tabla {
 
+    /**
+     * URES.
+     */
     public static final int URES = 0;
+
+    /**
+     * FEHER.
+     */
     public static final int FEHER = 1;
+
+    /**
+     * FEKETE.
+     */
     public static final int FEKETE = 2;
 
     private int[][] mezok = new int[5][4];
@@ -171,14 +182,14 @@ public class Tabla {
      * Függvény, amely a mezok[i][j]-nek értéket ad.
      *    @param i A mezok i. eleme
      *    @param j A mezok j. eleme
-     *    @param ertek, hogy a mezok[i][j]-nek milyen értéket adjunk
+     *    @param ertek hogy a mezok[i][j]-nek milyen értéket adjunk
      *    */
     public void setMezo(int i, int j, int ertek) {
         mezok[i][j] = ertek;
     }
 
     /**
-     * toString metódus
+     * toString metódus.
      */
     @Override
     public String toString() {
