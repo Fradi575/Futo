@@ -83,7 +83,7 @@ public class BishopController {
         selections.add(row);
         selections.add(col);
         if (selections.size() == 4) {
-            if(tabla.szabade(selections.get(0), selections.get(1), selections.get(2), selections.get(3)) && tabla.atugrasellenoriz(selections.get(0), selections.get(1), selections.get(2), selections.get(3))){
+            if(tabla.szabade(selections.get(0), selections.get(1), selections.get(2), selections.get(3))){
                 tabla.mozgat(selections.get(0), selections.get(1), selections.get(2), selections.get(3));
             }else{
                 Logger.info("A lépés nem megoldható!");

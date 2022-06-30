@@ -70,6 +70,7 @@ public class Tabla {
 
     public boolean szabade(int honnan_x, int honnan_y, int hova_x, int hova_y) {
 
+
         if (mezok[hova_x][hova_y] != URES) {
             return false;
 
@@ -100,21 +101,8 @@ public class Tabla {
                 }
             }
         }
-        return true;
 
-    }
 
-    /**
-     *
-     * @param honnan_x
-     * @param honnan_y
-     * @param hova_x
-     * @param hova_y
-     * Ez a fv ellenőrzi le, hogy léphet-e úgy a futó, hogy másik bábut átugorhasson.
-     */
-    public boolean atugrasellenoriz(int honnan_x, int honnan_y, int hova_x, int hova_y) {
-        // itt megnezi hog ne ugrojon at semmilyen  babut
-        // bal felso atlo
         String holVanAhovaMegyek = "sehol";
         if (honnan_x > hova_x && hova_y < honnan_y) holVanAhovaMegyek = "balFelul";
         else if (honnan_x > hova_x && hova_y > honnan_y) holVanAhovaMegyek = "jobbFelul";
@@ -154,6 +142,16 @@ public class Tabla {
         }
         return true;
     }
+
+    /**
+     *
+     * @param honnan_x
+     * @param honnan_y
+     * @param hova_x
+     * @param hova_y
+     * Ez a fv ellenőrzi le, hogy léphet-e úgy a futó, hogy másik bábut átugorhasson.
+     */
+
 
     /**
      * Meg van-e oldva a tábla.
